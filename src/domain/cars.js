@@ -1,3 +1,4 @@
+import { CarName } from "./car-name.js";
 import Car from "./car.js";
 
 export class Cars {
@@ -11,20 +12,14 @@ export class Cars {
     this.#value = [];
   }
 
-  #inRange(value, { min, max }) {
-    return min <= value && value <= max;
-  }
-
   #makeCarNameList(carNames, separator = ",") {
     if (typeof carNames !== "string") {
       throw new Error("자동차 이름은 string 타입이어야 합니다.");
     }
     if (
-      this.#inRange(carNames.length, {
-        min: Car.MIN_LENGTH_NAME,
-        max: Car.MAX_LENGTH_NAME,
-      }) &&
-      !carNames.includes(separator)
+      carNames.length <= CarName.MAX_LENGTH_NAME &&
+      !carNames.includes(separator) &&
+      CarName(carNames)
     ) {
       return [carNames];
     }

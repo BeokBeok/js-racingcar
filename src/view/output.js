@@ -5,7 +5,7 @@ export function printResult(/** @type Racing */ racing) {
   console.log("\n실행 결과\n");
   for (let cycle = 0; cycle < racing.phase; cycle++) {
     racing.cars.value.forEach((car) => {
-      printCarStatus(car.name, racing.history.get(car)[cycle]);
+      printCarStatus(car.name.value, racing.history.get(car)[cycle]);
     });
     console.log("\n");
   }

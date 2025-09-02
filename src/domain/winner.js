@@ -14,6 +14,6 @@ export class Winner {
     );
     return this.#cars.value
       .filter((car) => car.position === maxPosition)
-      .map((car) => car.name);
+      .map((car) => car.name.value);
   }
 }
