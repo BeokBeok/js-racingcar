@@ -39,22 +39,29 @@ export class Cars {
     return carNameList.map((carName) => new Car(carName));
   }
 
-  static fromNames(carNames, separator = ",") {
+  static #fromNames(carNames, separator = ",") {
     const cars = new Cars();
     const carNameList = cars.#makeCarNameList(carNames, separator);
     cars.#value = cars.#makeCarList(carNameList);
     return cars;
   }
 
-  static fromList(carList) {
-    if (
-      !Array.isArray(carList) ||
-      !carList.every((car) => car instanceof Car)
-    ) {
+  static #fromList(carList) {
+    if (!carList.every((car) => car instanceof Car)) {
       throw new Error("Car의 인스턴스로 된 배열이어야 합니다.");
     }
     const cars = new Cars();
     cars.#value = [...carList];
     return cars;
+  }
+
+  static from(args, separator = ",") {
+    if (Array.isArray(args)) {
+      return this.#fromList(args);
+    }
+    if (typeof args === "string") {
+      return this.#fromNames(args);
+    }
+    throw new Error("유효하지 않은 파라미터입니다.");
   }
 }
