@@ -20,19 +20,15 @@ describe("racing", () => {
     const racing = new Racing({ cars: cars });
     const moveStrategy = { shouldMove: () => true };
     const stayStrategy = { shouldMove: () => false };
-    const forwardStrategyList = [
-      [moveStrategy, moveStrategy, moveStrategy, moveStrategy, moveStrategy], // 5번 전진
-      [moveStrategy, moveStrategy, moveStrategy, moveStrategy, stayStrategy], // 4번 전진
-      [moveStrategy, moveStrategy, moveStrategy, stayStrategy, stayStrategy], // 3번 전진
-    ];
+    const moveStrategyList = [moveStrategy, stayStrategy, moveStrategy];
 
-    racing.run(forwardStrategyList);
+    racing.run(moveStrategyList);
 
     const pobi = racing.history.get(cars.value[0]);
     const crong = racing.history.get(cars.value[1]);
     const honux = racing.history.get(cars.value[2]);
     expect(pobi).toEqual([1, 2, 3, 4, 5]);
-    expect(crong).toEqual([1, 2, 3, 4, 4]);
-    expect(honux).toEqual([1, 2, 3, 3, 3]);
+    expect(crong).toEqual([0, 0, 0, 0, 0]);
+    expect(honux).toEqual([1, 2, 3, 4, 5]);
   });
 });

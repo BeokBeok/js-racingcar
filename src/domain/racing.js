@@ -35,7 +35,7 @@ export class Racing {
         if (moveStrategyList === null) {
           car.forward();
         } else {
-          car.forward(moveStrategyList[carIndex][cycle]);
+          car.forward(moveStrategyList[carIndex]);
         }
         const positionHistory = this.#history.get(car);
         this.#history.set(car, [...positionHistory, car.position]);
