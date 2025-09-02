@@ -18,6 +18,9 @@ export class Racing {
   }
 
   constructor({ cars, phase = 5 }) {
+    if (!(cars instanceof Cars)) {
+      throw new Error("cars는 Cars 의 인스턴스이어야 합니다.");
+    }
     this.#cars = cars;
 
     this.#validPhase(phase);

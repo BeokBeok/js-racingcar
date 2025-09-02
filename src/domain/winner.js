@@ -5,6 +5,9 @@ export class Winner {
   #cars;
 
   constructor({ cars }) {
+    if (!(cars instanceof Cars)) {
+      throw new Error("cars는 Cars의 인스턴스이어야 합니다.");
+    }
     this.#cars = cars;
   }
 

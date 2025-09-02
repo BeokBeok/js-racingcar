@@ -8,6 +8,9 @@ export class CarName {
   }
 
   constructor(value) {
+    if (typeof value !== "string") {
+      throw new Error("자동차 이름은 string 타입이어야 합니다");
+    }
     if (
       !this.#inRange(value.length, {
         min: CarName.#MIN_LENGTH_NAME,
