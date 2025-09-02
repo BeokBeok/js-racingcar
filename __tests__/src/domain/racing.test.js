@@ -18,13 +18,15 @@ describe("racing", () => {
   it("자동차 경주를 진행하여 각 단계별로 자동차의 움직임을 제어할 수 있습니다.", () => {
     const cars = Cars.fromNames("pobi,crong,honux");
     const racing = new Racing({ cars: cars });
-    const forwardNumberList = [
-      [4, 5, 6, 7, 8], // 5번 전진
-      [4, 5, 6, 7, 3], // 4번 전진
-      [4, 5, 6, 3, 2], // 3번 전진
+    const moveStrategy = { shouldMove: () => true };
+    const stayStrategy = { shouldMove: () => false };
+    const forwardStrategyList = [
+      [moveStrategy, moveStrategy, moveStrategy, moveStrategy, moveStrategy], // 5번 전진
+      [moveStrategy, moveStrategy, moveStrategy, moveStrategy, stayStrategy], // 4번 전진
+      [moveStrategy, moveStrategy, moveStrategy, stayStrategy, stayStrategy], // 3번 전진
     ];
 
-    racing.run(forwardNumberList);
+    racing.run(forwardStrategyList);
 
     const pobi = racing.history.get(cars.value[0]);
     const crong = racing.history.get(cars.value[1]);

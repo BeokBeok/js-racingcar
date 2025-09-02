@@ -29,16 +29,14 @@ export class Racing {
     });
   }
 
-  run(forwardNumberList = null) {
+  run(moveStrategyList = null) {
     for (let cycle = 0; cycle < this.#phase; cycle++) {
       this.#cars.value.forEach((car, carIndex) => {
-        let forwardNumber;
-        if (!forwardNumberList) {
-          forwardNumber = Math.floor(Math.random() * 10);
+        if (moveStrategyList === null) {
+          car.forward();
         } else {
-          forwardNumber = forwardNumberList[carIndex][cycle];
+          car.forward(moveStrategyList[carIndex][cycle]);
         }
-        car.forward(forwardNumber);
         const positionHistory = this.#history.get(car);
         this.#history.set(car, [...positionHistory, car.position]);
       });
